@@ -3,6 +3,8 @@ import { useState } from "react";
 import img from "../assets/Images/react-book-v2.png";
 import AddBookForm from "./AddBookForm";
 import { v4 as uuidv4 } from "uuid";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+
 import { useRef } from "react";
 const BookCard = ({
   onSearchChange,
@@ -10,6 +12,15 @@ const BookCard = ({
   setShowDialog,
   searchBook,
   setSearchBook,
+  favIcon,
+  setIsFavIcon,
+  showIcon,
+  favBookId,
+  setFavBookId,
+  toggleBook,
+
+  showFavBook,
+  setShowFavBook,
 }) => {
   const [BookData, setBookData] = useState([
     {
@@ -28,21 +39,20 @@ const BookCard = ({
     },
   ]);
 
-  // const [fileteredBooks, setFilteredBooks] = useState([]);
-
+  // const [click, setIsClicked] = useState({});
+  const [favbook, setFavBook] = useState(false);
   function DeleteBook(id) {
     setBookData((prevBook) => {
       return prevBook.filter((book) => book.id !== id);
     });
   }
 
-  // function fileteredBooks() {
   let store = BookData.filter((book) => {
     return searchBook === ""
       ? book
       : book.title.toLowerCase().includes(searchBook);
   });
-  // }
+
   //  return searchBook===""?book:book.title.toLocaleLowerCase().includes(searchBook)
   const InputRef = useRef(null);
   const [image, setImage] = useState({});
@@ -58,21 +68,38 @@ const BookCard = ({
       }));
     }
   };
+
+  let displayBooks = showFavBook
+    ? BookData.filter((book) => favBookId.includes(book.id))
+    : store;
+
   return (
     <>
       <div className="w-full h-[100vh] flex flex-wrap gap-15 bg-amber-500 p-[50px] ">
-        {store.map((book) => (
+        {displayBooks.map((book) => (
           <div
             className="w-[220px] h-[350px] bg-amber-900 rounded-[10px] p-[20px] "
             key={book.id}
           >
-            <div className="flex justify-end">
+            <div className="flex justify-between items-center">
               <div
                 onClick={() => DeleteBook(book.id)}
                 className="cursor-pointer text-[18px] font-semibold"
               >
                 X
               </div>
+
+              {favBookId.includes(book.id) ? (
+                <FaHeart
+                  className="cursor-pointer"
+                  onClick={() => toggleBook(book.id)}
+                />
+              ) : (
+                <FaRegHeart
+                  className="cursor-pointer"
+                  onClick={() => toggleBook(book.id)}
+                />
+              )}
             </div>
             <div className="flex flex-col items-center gap-[15px]">
               <div
