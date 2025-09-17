@@ -1,29 +1,14 @@
 import React from "react";
-import AddBookForm from "./AddBookForm";
-import { useState } from "react";
 import { RiHeartAdd2Fill } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 
 const NavBar = ({
-  showDialog,
   setShowDialog,
   searchBook,
   setSearchBook,
-  favIcon,
-  // favbook,
-  setIsFavIcon,
-  favBookId,
-  setFavBookId,
-
   showFavBook,
   setShowFavBook,
 }) => {
-  // const [favIcon, setIsFavIcon] = useState(false);
-
-  function clicked() {
-    setIsFavIcon(true);
-    console.log("Punjabi Agay Na!!!");
-  }
   return (
     <>
       <div className="w-full bg-amber-700 h-[70px] px-15 flex items-center justify-between">
@@ -34,14 +19,13 @@ const NavBar = ({
             className="border-none  outline-none  px-[10px]"
             name="title"
             placeholder="Search here..."
-            value={searchBook}
+            value={searchBook.toLowerCase()}
             onChange={(e) => setSearchBook(e.target.value)}
           />
           <IoSearchOutline className="text-2xl font-semibold" />
         </div>
         <div className="flex items-center gap-[15px]">
           <div>
-            {/* <Link to="/favbook"> */}
             <RiHeartAdd2Fill
               className="text-3xl text-white cursor-pointer"
               onClick={() => setShowFavBook(!showFavBook)}

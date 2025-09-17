@@ -8,8 +8,6 @@ const App = () => {
   const [showDialog, setShowDialog] = useState(false);
 
   const [favBookId, setFavBookId] = useState([]);
-  const [favIcon, setIsFavIcon] = useState([]);
-  // const [showIcon, setShowIcon] = useState(false);
   const [showFavBook, setShowFavBook] = useState(false);
   function toggleBook(id) {
     if (favBookId.includes(id)) {
@@ -27,8 +25,6 @@ const App = () => {
           setShowDialog={setShowDialog}
           searchBook={searchBook}
           setSearchBook={setSearchBook}
-          favIcon={favIcon}
-          setIsFavIcon={setIsFavIcon}
           favBookId={favBookId}
           setFavBookId={setFavBookId}
           toggleBook={toggleBook}
@@ -40,8 +36,6 @@ const App = () => {
           setShowDialog={setShowDialog}
           searchBook={searchBook}
           setSearchBook={setSearchBook}
-          favIcon={favIcon}
-          setIsFavIcon={setIsFavIcon}
           favBookId={favBookId}
           setFavBookId={setFavBookId}
           toggleBook={toggleBook}

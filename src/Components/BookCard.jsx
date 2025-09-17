@@ -7,20 +7,12 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import { useRef } from "react";
 const BookCard = ({
-  onSearchChange,
   showDialog,
   setShowDialog,
   searchBook,
-  setSearchBook,
-  favIcon,
-  setIsFavIcon,
-  showIcon,
   favBookId,
-  setFavBookId,
   toggleBook,
-
   showFavBook,
-  setShowFavBook,
 }) => {
   const [BookData, setBookData] = useState([
     {
@@ -39,8 +31,6 @@ const BookCard = ({
     },
   ]);
 
-  // const [click, setIsClicked] = useState({});
-  const [favbook, setFavBook] = useState(false);
   function DeleteBook(id) {
     setBookData((prevBook) => {
       return prevBook.filter((book) => book.id !== id);
@@ -53,9 +43,8 @@ const BookCard = ({
       : book.title.toLowerCase().includes(searchBook);
   });
 
-  //  return searchBook===""?book:book.title.toLocaleLowerCase().includes(searchBook)
   const InputRef = useRef(null);
-  const [image, setImage] = useState({});
+  const [image, setImage] = useState([]);
   const handleImgClick = () => {
     InputRef.current.click();
   };
@@ -82,13 +71,6 @@ const BookCard = ({
             key={book.id}
           >
             <div className="flex justify-between items-center">
-              <div
-                onClick={() => DeleteBook(book.id)}
-                className="cursor-pointer text-[18px] font-semibold"
-              >
-                X
-              </div>
-
               {favBookId.includes(book.id) ? (
                 <FaHeart
                   className="cursor-pointer"
@@ -100,6 +82,12 @@ const BookCard = ({
                   onClick={() => toggleBook(book.id)}
                 />
               )}
+              <div
+                onClick={() => DeleteBook(book.id)}
+                className="cursor-pointer text-[18px] font-semibold"
+              >
+                X
+              </div>
             </div>
             <div className="flex flex-col items-center gap-[15px]">
               <div
